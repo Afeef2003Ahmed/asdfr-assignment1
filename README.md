@@ -1,8 +1,8 @@
 # Advanced Software Development for Robotics - Assignment 1
 
 ## Group Information
-- **Group Members**: [Your Names]
-- **Course**: ASDFR 2025
+- **Group Members**: Afeef & Vaishnav
+- **Course**: ASDFR 
 - **Date**: February 2026
 
 ---
