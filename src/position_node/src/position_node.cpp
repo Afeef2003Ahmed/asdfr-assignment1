@@ -5,7 +5,7 @@
 class PositionNode : public rclcpp::Node {
 public:
     PositionNode() : Node("position_node") {
-        threshold_ = this->declare_parameter<double>("color_threshold", 200.0);
+        threshold_ = this->declare_parameter<double>("color_threshold", 230.0);
         
         sub_ = this->create_subscription<sensor_msgs::msg::Image>(
             "/image", 10, [this](const sensor_msgs::msg::Image::SharedPtr msg) {
