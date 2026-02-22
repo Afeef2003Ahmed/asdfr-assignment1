@@ -251,3 +251,74 @@ bash
 ros2 run rqt_plot rqt_plot /output/robot_pose/pose/position/x \
                            /output/robot_pose/pose/position/y \
                            /output/robot_pose/pose/orientation/z
+
+
+## Assignment 1.2.2: Object Following with Image Processing
+
+### New Package Created
+- Package: `object_follower`
+- Node: `object_follower`
+
+### Build
+```bash
+cd ~/assignment_1_ws
+colcon build --packages-select object_follower
+source install/setup.bash
+
+Files Used
+
+    position_node (from 1.1.4) - detects object position
+
+    object_follower (new) - controls robot to follow object
+
+    relbot_simulator - simulates robot movement
+
+    cam2image_vm2ros - provides camera feed
+
+Bash Commands - All Terminals
+
+Terminal 1 (Host Machine - Outside VM):
+bash
+
+# Start video server
+python videoserver.py
+
+Terminal 2 (VM):
+bash
+
+# Start camera node with correct image dimensions
+ros2 run cam2image_vm2ros cam2image --ros-args \
+  --params-file src/cam2image_vm2ros/config/cam2image.yaml
+
+Terminal 3 (VM):
+bash
+
+# Start object position detector (from 1.1.4)
+cd ~/assignment_1_ws
+source install/setup.bash
+ros2 run position_node position_node
+
+Terminal 4 (VM):
+bash
+
+# Start object follower (NEW for 1.2.2)
+cd ~/assignment_1_ws
+source install/setup.bash
+ros2 run object_follower object_follower --ros-args \
+  -p image_width:=300.0 \
+  -p gain:=0.01 \
+  -p base_speed:=0.5
+
+Terminal 5 (VM):
+bash
+
+# Start RELbot simulator
+cd ~/assignment_1_ws
+source install/setup.bash
+ros2 run relbot_simulator relbot_simulator
+
+Terminal 6 (VM):
+bash
+
+# Start turtlesim visualization
+ros2 run turtlesim turtlesim_node
