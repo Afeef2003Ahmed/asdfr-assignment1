@@ -114,13 +114,6 @@ ros2 run turtlesim turtlesim_node
 # Terminal 3
 ros2 run sequence_controller sequence_controller
 
-# Monitoring commands:
-
-ros2 node list
-ros2 topic list
-ros2 topic echo /input/motor_cmd
-ros2 topic echo /output/robot_pose
-rqt_graph
 
 # Location in code: sequence_controller.cpp in sequence_controller package
 
@@ -157,20 +150,34 @@ ros2 run relbot_simulator relbot_simulator
 # Terminal 6 (VM)
 ros2 run turtlesim turtlesim_node
 
-# Monitoring commands:
 
-ros2 topic echo /object_position
-ros2 topic echo /input/motor_cmd
-ros2 topic echo /output/robot_pose
-rqt_graph
 
-# Parameter tuning:
+# ─────────────────────────────────────────────────
+# Assignment 1.2.3
+# ─────────────────────────────────────────────────
 
-ros2 run object_follower object_follower --ros-args \
-  -p image_width:=300.0 \
-  -p gain:=0.015 \
-  -p base_speed:=0.4
+```bash
+# Terminal 1 (Host)
+python videoserver.py
 
-```
+# Terminal 2 (VM)
+ros2 run cam2image_vm2ros cam2image --ros-args \
+  --params-file src/cam2image_vm2ros/config/cam2image.yaml
 
+# Terminal 3 (VM)
+ros2 run position_node position_node
+
+# Terminal 4 (VM)
+ros2 run closed_loop_follower closed_loop_follower --ros-args \
+  -p tau:=0.2 \
+  -p pixel_to_meter:=0.01 \
+  -p img_center:=150.0
+
+# Terminal 5 (VM)
+ros2 run relbot_simulator relbot_simulator
+
+# Terminal 6 (VM)
+ros2 run turtlesim turtlesim_node
+
+# Location in code: closed_loop_follower.cpp in closed_loop_follower package
 
