@@ -5,20 +5,19 @@
 class ObjectFollower : public rclcpp::Node {
 public:
     ObjectFollower() : Node("object_follower") {
-        // Publisher to simulator
+       
         motor_pub_ = this->create_publisher<relbot_msgs::msg::RelbotMotors>("/input/motor_cmd", 10);
         
-        // Subscribe to object position
+       
         position_sub_ = this->create_subscription<geometry_msgs::msg::Point>(
             "/object_position", 10,
             std::bind(&ObjectFollower::position_callback, this, std::placeholders::_1));
         
-        // Timer for control loop (20 Hz)
+       
         control_timer_ = this->create_wall_timer(
             std::chrono::milliseconds(50),
             std::bind(&ObjectFollower::control_callback, this));
-        
-        // Parameters
+  
         this->declare_parameter("gain", 0.005);
         this->declare_parameter("base_speed", 0.5);
         this->declare_parameter("max_speed", 2.0);
@@ -74,7 +73,7 @@ private:
         
         
         if (std::abs(error_x) < dead_zone) {
-            // Object centered - go straight
+           
             motor_msg.left_wheel_vel = base_speed;
             motor_msg.right_wheel_vel = base_speed;
             RCLCPP_INFO(this->get_logger(), "CENTERED - going straight");
@@ -115,12 +114,12 @@ private:
         motor_pub_->publish(motor_msg);
     }
     
-    // ROS2 handles
+  
     rclcpp::Publisher<relbot_msgs::msg::RelbotMotors>::SharedPtr motor_pub_;
     rclcpp::Subscription<geometry_msgs::msg::Point>::SharedPtr position_sub_;
     rclcpp::TimerBase::SharedPtr control_timer_;
     
-    // State
+   
     double latest_x_, latest_y_;
     bool object_detected_;
 };

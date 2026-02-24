@@ -16,15 +16,15 @@ public:
 
 private:
     void process(const sensor_msgs::msg::Image::SharedPtr msg) {
-        // Check if image is BGR8 format
+        
         if (msg->encoding != "bgr8") return;
         
         long sum = 0;
         int pixels = msg->width * msg->height;
         
-        // Each pixel = 3 bytes (B,G,R)
+        
         for (size_t i = 0; i < msg->data.size(); i += 3) {
-            // Simple brightness: average of B, G, R
+            
             sum += (msg->data[i] + msg->data[i+1] + msg->data[i+2]) / 3;
         }
         

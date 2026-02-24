@@ -4,10 +4,10 @@
 class SequenceController : public rclcpp::Node {
 public:
     SequenceController() : Node("sequence_controller"), step_(0) {
-        // Publisher to simulator
+       
         pub_ = this->create_publisher<relbot_msgs::msg::RelbotMotors>("/input/motor_cmd", 10);
         
-        // 2 second timer for each step
+
         timer_ = this->create_wall_timer(
             std::chrono::seconds(2),
             std::bind(&SequenceController::timer_callback, this));
@@ -20,33 +20,32 @@ private:
     void timer_callback() {
         auto msg = relbot_msgs::msg::RelbotMotors();
         
-        // 5-step sequence
         switch(step_ % 5) {
-            case 0: // Step 1: Forward for 2 seconds
+            case 0: 
                 msg.left_wheel_vel = 2.0;
                 msg.right_wheel_vel = 2.0;
                 RCLCPP_INFO(this->get_logger(), "STEP 1: FORWARD - left: 2.0, right: 2.0");
                 break;
                 
-            case 1: // Step 2: Turn right for 2 seconds
+            case 1: 
                 msg.left_wheel_vel = 1.0;
                 msg.right_wheel_vel = -1.0;
                 RCLCPP_INFO(this->get_logger(), "STEP 2: TURN RIGHT - left: 1.0, right: -1.0");
                 break;
                 
-            case 2: // Step 3: Turn left for 2 seconds
+            case 2:
                 msg.left_wheel_vel = -1.0;
                 msg.right_wheel_vel = 1.0;
                 RCLCPP_INFO(this->get_logger(), "STEP 3: TURN LEFT - left: -1.0, right: 1.0");
                 break;
                 
-            case 3: // Step 4: Backward for 2 seconds
+            case 3:
                 msg.left_wheel_vel = -2.0;
                 msg.right_wheel_vel = -2.0;
                 RCLCPP_INFO(this->get_logger(), "STEP 4: BACKWARD - left: -2.0, right: -2.0");
                 break;
                 
-            case 4: // Step 5: Stop for 2 seconds
+            case 4: 
                 msg.left_wheel_vel = 0.0;
                 msg.right_wheel_vel = 0.0;
                 RCLCPP_INFO(this->get_logger(), "STEP 5: STOP - left: 0.0, right: 0.0");
