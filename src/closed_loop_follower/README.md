@@ -21,7 +21,7 @@ Type: relbot_msgs/msg/RelbotMotors
 The message contains left_wheel_vel and right_wheel_vel in rad/s
 
 ### Run
-In a terminal run the following commands:
+In a terminal run the following command:
 ```bash
 ros2 run closed_loop_follower closed_loop_follower --ros-args \
   -p tau:=0.5 \
