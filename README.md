@@ -114,13 +114,6 @@ ros2 run turtlesim turtlesim_node
 # Terminal 3
 ros2 run sequence_controller sequence_controller
 
-# Monitoring commands:
-
-ros2 node list
-ros2 topic list
-ros2 topic echo /input/motor_cmd
-ros2 topic echo /output/robot_pose
-rqt_graph
 
 # Location in code: sequence_controller.cpp in sequence_controller package
 
