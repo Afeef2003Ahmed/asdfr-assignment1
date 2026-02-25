@@ -4,7 +4,7 @@ from launch.actions import ExecuteProcess
 
 def generate_launch_description():
     return LaunchDescription([
-        # Camera node
+        
         Node(
             package='cam2image_vm2ros',
             executable='cam2image',
@@ -22,14 +22,14 @@ def generate_launch_description():
             }]
         ),
         
-        # Position detector node (from 1.1.4)
+        
         Node(
             package='position_node',
             executable='position_node',
             name='position_node'
         ),
         
-        # Closed loop follower node
+        
         Node(
             package='closed_loop_follower',
             executable='closed_loop_follower',
@@ -42,7 +42,7 @@ def generate_launch_description():
             }]
         ),
         
-        # RELbot simulator
+       
         Node(
             package='relbot_simulator',
             executable='relbot_simulator',
@@ -53,7 +53,7 @@ def generate_launch_description():
             }]
         ),
         
-        # Turtlesim for visualization
+       
         Node(
             package='turtlesim',
             executable='turtlesim_node',

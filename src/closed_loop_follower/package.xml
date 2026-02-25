@@ -4,7 +4,7 @@
   <name>closed_loop_follower</name>
   <version>0.0.0</version>
   <description>TODO: Package description</description>
-  <maintainer email="afeef.ahmed603@gmail.com">afeef_ahmed</maintainer>
+  <maintainer email="afeef_ahmed@todo.todo">afeef_ahmed</maintainer>
   <license>TODO: License declaration</license>
 
   <buildtool_depend>ament_cmake</buildtool_depend>

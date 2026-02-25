@@ -3,7 +3,7 @@ from launch_ros.actions import Node
 
 def generate_launch_description():
     return LaunchDescription([
-        # RELbot Simulator
+        
         Node(
             package='relbot_simulator',
             executable='relbot_simulator',
@@ -14,14 +14,14 @@ def generate_launch_description():
             }]
         ),
         
-        # Sequence Controller
+        
         Node(
             package='sequence_controller',
             executable='sequence_controller',
             name='sequence_controller'
         ),
         
-        # Turtlesim for visualization
+    
         Node(
             package='turtlesim',
             executable='turtlesim_node',
